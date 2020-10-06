@@ -1,0 +1,11 @@
+{
+  "timeZone": "Europe/London",
+  "dependencies": {
+  },
+  "webapp": {
+    "access": "DOMAIN",
+    "executeAs": "USER_DEPLOYING"
+  },
+  "exceptionLogging": "STACKDRIVER",
+  "runtimeVersion": "V8"
+}
