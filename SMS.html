@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Client Text Form</title>
+  <style>
+    html,
+    body {
+      min-height: 100%;
+      padding: 0;
+      margin: 0;
+      font-family: Roboto, Arial, sans-serif;
+      font-size: 14px;
+      color: #666;
+    }
+
+    h2 {
+      margin: 0 0 20px;
+      font-weight: bold;
+      color: #008080;
+    }
+
+    p {
+      margin: 0 0 5px;
+    }
+
+    .main-block {
+      display: inline-block;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #77A1B5;
+      background-image: url('https://drive.google.com/uc?export=view&id=125LLTYK_DJW3IHTHI4SNvNSq7c9zPFtU');
+      background-repeat: no-repeat;
+      background-position: 12% 9%;
+      width: 100%;
+    }
+
+    #content {
+      padding: 25px;
+      vertical-align: middle;
+      text-align: center;
+      margin: auto;
+      margin-top: 5%;
+      box-shadow: 0 2px 5px #f5f5f5;
+      background: #fff;
+      width: 650px;
+    }
+
+    .loader {
+      border: 8px solid #4eb575;
+      border-radius: 50%;
+      border-top: 8px solid #f2970f;
+      border-bottom: 8px solid #4eb575;
+      margin-left: -30px;
+      width: 8px;
+      height: 8px;
+      -webkit-animation: spin 2s linear infinite;
+      /* Safari */
+      animation: spin 2s linear infinite;
+      position: relative;
+      display: inline-block;
+    }
+
+    /* Safari */
+    @-webkit-keyframes spin {
+      0% {
+        -webkit-transform: rotate(0deg);
+      }
+
+      100% {
+        -webkit-transform: rotate(360deg);
+      }
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main-block">
+    <div id="content">
+      <form id="textmessage" action="https://script.google.com/a/calancs.org.uk/macros/s/AKfycbyIO53UlA6yByXff8yap65TL_Wey42nt9saHl5XdDK8QP4W-Lez/exec" method="post">
+        <div style="text-align: left; width: 650px; height: 440px;">
+          <div style="display: inline-block;">
+            <h2 style="vertical-align: middle; display: inline-block; margin-right: 70px;">
+              Send Text Message to Client
+            </h2>
+            <a style="vertical-align: top; display: inline-block; margin-top: 5px;" href="https://docs.google.com/spreadsheets/d/1xxHYdpnaOG1Ze6pDXFl2Br_ieIMaFxHZTDW6hltB8k4/edit?usp=sharing" target="_blank">
+              View Message History
+            </a>
+          </div>
+          <br />
+          <br />
+          <p style="font-weight: bold;">
+            If the client replies to this message, it will be forwarded to:
+            <!--?=replyaddr?-->
+          </p>
+          <br />
+          <p>
+            Case Identifier:
+          </p>
+          <input id="caseid" style="display: inline; border-width: 1px; margin: bottom:80px; font-weight: normal; height: 25px; font-size: 14px;" name="caseid" pattern="^[-a-zA-Z0-9]*$" required="" type="text" placeholder="e.g. Case Number" />
+          <br />
+          <br />
+          <p>
+            Client mobile number
+          </p>
+          <input id="clientmobile" style="margin: bottom:80px; display: block;" name="clientmobile" pattern="^0?[789]\d{9}$" required="" type="text" placeholder="Client Mobile number" />
+          <br />
+          <br />
+          <div style="width: 400px&gt;;">
+            <textarea id="message" style="resize: none; margin: bottom:150px; width: 360px; height: 55px; font-size: 14px; display: inline-block;" maxlength="80" name="message" required="" rows="2" placeholder="Message (Max 80 chars)">
+					</textarea>
+            <div style="display: inline-block; width: 240px; vertical-align: top;">
+              <label id="clipboardmsg" style="display: inline-block; vertical-align: middle; cursor: pointer;">
+                Copy message to clipboard
+              </label>
+            </div>
+            <label id="zz" style="display: none; font-size: 14px; font-weight: bold; color: #66cc66; margin-left: -230px;">
+              Copied to clipboard
+            </label>
+          </div>
+          <br />
+          <label id="remembertocopy" style="display: none; font-size: 14px; color: red; font-weight: bold;">
+            Please remember COPY/PASTE the message into Casebook before sending !!
+          </label>
+          <br />
+          <br />
+          <button id="btnsubmit" style="margin-right: 10px; border: solid 1px #000; margin: top:150px; width: 150px; height: 30px; background-color: #77a1b5; color: #fff; font-size: 14px; font-weight: bold; display: inline-block;" type="submit">
+            Send Text
+          </button>
+          <input id="anon" style="width: 18px; height: 18px; vertical-align: middle;" name="anon" type="checkbox" />
+          <label for="anon">
+            Anonymise Sender Details
+          </label>
+          <span style="cursor: pointer;">
+            <label style="cursor: pointer;">
+              Clear Form
+            </label>
+          </span>
+          <br />
+          <div id="progress" style="display: none;">
+            <div style="display: inline-block; color: red; margin-right: 40px; margin-top: 10px;">
+              Sending please wait ...
+            </div>
+          </div>
+          <div id="statusmessage" style="&lt;?= displaystatus ?&gt;;width: 100%; margin-top: 10px;">
+            <p style="color: red; font-size: 14px; display: inline-block;">
+              Message sent to client mobile: 0
+              <!--?= clientmobile ?--> (Case ID:
+              <!--?= caseid ?-->) ✔
+            </p>
+            <!--
+					<image style="display:inline-block;margin-left:5px;" src="https://drive.google.com/uc?export=view&id=1KwLroNM2s0j95Q9XIyj0iahTajeMwakK" style="vertical-align:middle" width="24px" height="25px" />
+					 -->
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function clearstatus() {
+      document.getElementById("statusmessage").style.display = 'none';
+      document.getElementById('clipboardmsg').style.color = 'gray';
+      document.getElementById('clipboardmsg').innerHTML = 'Copy message to clipboard';
+      document.getElementById('remembertocopy').style.display = 'inline';
+    }
+
+    function formsubmitted() {
+      document.getElementById('clipboardmsg').style.color = 'gray';
+      document.getElementById('clipboardmsg').innerHTML = 'Copy message to clipboard';
+      document.getElementById("btnsubmit").disabled = true;
+      document.getElementById("progress").style.display = 'inline';
+      document.getElementById('remembertocopy').style.display = 'none';
+    }
+
+    function copymessagetoclipboard() {
+      if (document.getElementById("message").value.length > 0) {
+        document.getElementById("message").select();
+        document.execCommand('copy');
+        let sel = document.getSelection();
+        sel.removeAllRanges();
+        document.getElementById('clipboardmsg').style.color = '#00CC00';
+        document.getElementById('clipboardmsg').innerHTML = 'Message copied to clipboard &#10004;';
+      }
+    }
+
+    function cleartextmessage() {
+      document.getElementById('message').value = '';
+      document.getElementById('caseid').value = '';
+      document.getElementById('clientmobile').value = '';
+      document.getElementById('caseid').focus();
+      document.getElementById('clipboardmsg').style.color = 'gray';
+      document.getElementById('clipboardmsg').innerHTML = 'Copy message to clipboard';
+      document.getElementById('remembertocopy').style.display = 'none';
+    }
+  </script>
+</body>
+
+</html>
