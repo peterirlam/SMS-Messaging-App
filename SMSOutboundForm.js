@@ -59,4 +59,28 @@ function doPost(e) {
   html.result = status;
   return html.evaluate().setSandboxMode(HtmlService.SandboxMode.IFRAME)
     .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
+
+  function sendSMSAQL(to, body, originator) {
+    var data = {
+      'originator': originator,
+      'destinations': ["44" + to],
+      'message': body
+    };
+    var options = {
+      'method': 'post',
+      'contentType': 'application/json',
+      'payload': JSON.stringify(data),
+      "headers": {
+        "X-Auth-Token": "db0a3ec165f872294d798dc1fad81016fd3d193bb0385bf2449a9ec9b3a44210e1de3374",
+        "contentType": "application/json"
+      }
+    };
+    var response = UrlFetchApp.fetch('https://api.aql.com/v2/sms/send', options);
+    Logger.log(response.getResponseCode());
+    if (response.getResponseCode() == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
