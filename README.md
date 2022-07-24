@@ -1,2 +1,2 @@
 # SMS-Messaging-App
-The SMS messaging app is located on the charity's intranet (which I designed). It allows our staff to text message clients from their PC or laptop and review any client replies.
+The SMS messaging app allows our staff to text message clients from their PC or laptop, review any client replies, and manage client journey more effectively from a single location. Removing the need to provide work mobiles, lowered monthly expenses by 5%. Managing text message exchanges centrally, rather than from a separate device, saw a rise in client communication by almost 20%.
